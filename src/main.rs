@@ -8,7 +8,7 @@ use advent_error::AdventError;
 
 fn main() {
     match parse_args(env::args()) {
-        Err(error) => println!("Encountered error: {}", error),
+        Err(error) => println!("{}", error),
         Ok((day, puzzle_input)) => {
             match day {
                 1 => print_result(day, days::day_01::call(puzzle_input)),

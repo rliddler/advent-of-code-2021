@@ -27,7 +27,7 @@ impl fmt::Display for AdventError {
         match *self {
             AdventError::Io(ref err) => err.fmt(f),
             AdventError::Parse(ref err) => err.fmt(f),
-            AdventError::Custom(ref err) => write!(f, "A custom error occurred {:?}", err),
+            AdventError::Custom(ref err) => write!(f, "{:?}", err),
         }
     }
 }

@@ -6,13 +6,10 @@ pub fn call(puzzle_input: String) -> String {
 
     let slice = &depths[..];
 
-    let count_a = count_increase(slice);
-    let count_b = count_sum_increase(slice);
-
-    format!("A: {}, B: {}", count_a, count_b)
+    format!("A: {}, B: {}", count_a(slice), count_b(slice))
 }
 
-fn count_increase(depths: &[i32]) -> i32 {
+fn count_a(depths: &[i32]) -> i32 {
     depths.windows(2).fold(0, |acc, window| {
         if window[0] < window[1] {
             return acc + 1
@@ -22,7 +19,7 @@ fn count_increase(depths: &[i32]) -> i32 {
     })
 }
 
-fn count_sum_increase(depths: &[i32]) -> i32 {
+fn count_b(depths: &[i32]) -> i32 {
     depths.windows(4).fold(0, |acc, window| {
         let previous_sum: i32 = window[0..3].iter().sum();
         let new_sum: i32 = window[1..4].iter().sum();
