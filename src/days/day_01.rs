@@ -11,11 +11,7 @@ pub fn call(puzzle_input: String) -> String {
 
 fn count_a(depths: &[i32]) -> i32 {
     depths.windows(2).fold(0, |acc, window| {
-        if window[0] < window[1] {
-            return acc + 1
-        }
-
-        acc
+        if window[0] < window[1] { acc + 1 } else { acc }
     })
 }
 
@@ -24,10 +20,6 @@ fn count_b(depths: &[i32]) -> i32 {
         let previous_sum: i32 = window[0..3].iter().sum();
         let new_sum: i32 = window[1..4].iter().sum();
 
-        if previous_sum < new_sum {
-            return acc + 1
-        }
-
-        acc
+        if previous_sum < new_sum { acc + 1 } else { acc }
     })
 }
