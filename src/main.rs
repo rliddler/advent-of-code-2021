@@ -12,6 +12,7 @@ fn main() {
         Ok((day, puzzle_input)) => {
             match day {
                 1 => print_result(day, days::day_01::call(puzzle_input)),
+                2 => print_result(day, days::day_02::call(puzzle_input)),
                 _ => println!("There was no matching puzzle day found, get on it!")
             }
         }
