@@ -71,10 +71,12 @@ class Grid
   def mark_ball ball
     @last_ball = ball
 
-    @rows.map do |row|
-      row.map do |sqr|
-        sqr.called = 1 if sqr.number == ball
-        sqr
+    @rows.each do |row|
+      row.each do |sqr|
+        if sqr.number == ball
+          sqr.called = 1
+          return
+        end
       end
     end
   end
