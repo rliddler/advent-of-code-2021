@@ -17,7 +17,7 @@ class Day
       when "up"
         acc[:depth] -= amount
       else
-        puts "Did not know what to do with instruction: #{}"
+        puts "Did not know what to do with instruction: #{instruction}"
       end
 
       acc
@@ -40,7 +40,7 @@ class Day
       when "up"
         acc[:aim] -= amount
       else
-        puts "Did not know what to do with instruction: #{}"
+        puts "Did not know what to do with instruction: #{instruction}"
       end
 
       acc
