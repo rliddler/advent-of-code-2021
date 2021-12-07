@@ -2,29 +2,39 @@ class Day
 
   def call input
     positions = input.lines.first.split(",").map(&:to_i)
-    range = 0..positions.max
-    return "#{a(positions, range)}, #{b(positions, range)}"
+    return "#{a(positions)}, #{b(positions)}"
   end
 
-  def a positions, range
-    target = range.min_by { |x| cost_to_move_a(positions, x) }
-    cost_to_move_a(positions, target)
+  def a positions
+    # We can actually just get the median in effect as it would
+    # be the minimal distance from all points?
+    #
+    #   x - - - - - x - | - x - - - - x
+    #
+
+    median = positions.sort[positions.size / 2]
+    positions.reduce(0) {|acc, pos| acc + (pos - median).abs }
   end
 
-  def b positions, range
-    target = range.min_by { |x| cost_to_move_b(positions, x)}
-    cost_to_move_b(positions, target)
+  def b positions
+    # I think what we're calculating here is the mean?
+    # There is an increased cost for moving away from the most
+    # average line?
+    #    x
+    #    |
+    # - - - - - - -
+    #       |
+    #       |
+    #       x
+
+    mean = positions.sum / positions.size.to_f
+    floor = positions.reduce(0) { |acc, pos| acc + gauss_cost((pos - mean.floor).abs) }
+    ceil = positions.reduce(0) { |acc, pos| acc + gauss_cost((pos - mean.ceil).abs) }
+
+    [floor, ceil].min
   end
 
-  def cost_to_move_a positions, target
-    positions.reduce(0) { |acc, position| acc + (position - target).abs }
-  end
-
-  def cost_to_move_b positions, target
-    positions.reduce(0) do |acc, position|
-      # Hello Gauss summation
-      diff = (position - target).abs
-      acc + (diff * (diff + 1) / 2)
-    end
+  def gauss_cost val
+    val * (val+1) / 2
   end
 end
