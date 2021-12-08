@@ -1,16 +1,5 @@
-class Day
-  def call input
-    positions = input.lines.first.split(",").map(&:to_i)
-
-    median = positions.sort[positions.size / 2]
-    mean = positions.sum / positions.size.to_f
-    a = positions.reduce(0) {|acc, pos| acc + (pos - median).abs }
-
-    gauss_cost = ->(val) { val * (val+1) / 2 }
-    floor = positions.reduce(0) { |acc, pos| acc + gauss_cost.call((pos - mean.floor).abs) }
-    ceil = positions.reduce(0) { |acc, pos| acc + gauss_cost.call((pos - mean.ceil).abs) }
-    b = [floor, ceil].min
-
-    return "#{a}, #{b}"
-  end
-end
+p = File.read(File.expand_path("#{__dir__}/../../input/days/day_07.txt")).lines.first.split(",").map(&:to_i)
+gauss_cost = ->(val) { val * (val+1) / 2 }
+puts "#{p.reduce(0) {|acc, pos| acc + (pos - p.sort[p.size / 2]).abs }}, #{
+    [p.reduce(0) { |acc, pos| acc + gauss_cost.call((pos - (p.sum / p.size.to_f).floor).abs) },
+     p.reduce(0) { |acc, pos| acc + gauss_cost.call((pos - (p.sum / p.size.to_f).ceil).abs) }].min}"
