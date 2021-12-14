@@ -20,4 +20,15 @@ describe Day do
   it "calculates the thing with the display etc" do
     expect(subject.a(input)).to eq 26
   end
+
+
+  it "calculates the full number for this single line" do
+    single = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf"
+    expect(subject.b(single)).to eq 5353
+  end
+
+  it "calculates the full number for this single line" do
+    expect(subject.b(input)).to eq 61229
+  end
+
 end
